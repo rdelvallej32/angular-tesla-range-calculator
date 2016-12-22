@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { Stat } from '../../models/stat.interface';
+import { BatteryService } from '../../tesla-battery.service';
+
 @Component({
   selector: 'tesla-battery',
   templateUrl: './tesla-battery.component.html',
@@ -9,9 +12,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 export class TeslaBatteryComponent implements OnInit {
   title: string = 'Range Per Charge';
+  models: any;
+  stats: Stat[];
   tesla: FormGroup;
 
-  constructor(public fb: FormBuilder) { }
+  private results: Array<String> = ['60', '60D', '75', '75D', '90D', 'P100D'];
+
+  constructor(public fb: FormBuilder, private batteryService: BatteryService) { }
 
   ngOnInit() {
     this.tesla = this.fb.group({
@@ -21,6 +28,17 @@ export class TeslaBatteryComponent implements OnInit {
         climate: true,
         wheels: 19
       })
+    });
+  }
+
+  private calculateStats(models, value): Stat[] {
+    return models.map(model => {
+      const { speed, temperature, climate, wheels } = value;
+      const miles = this.models[model][wheels][climate ? 'on' : 'off'].speed[speed][temperature];
+      return {
+        model,
+        miles
+      };
     });
   }
 }
