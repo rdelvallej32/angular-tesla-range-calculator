@@ -16,9 +16,9 @@ const NUMBER_CONTROL_ACCESSOR = {
 @Component({
   selector: 'tesla-counter',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './tesla-counter.html',
+  templateUrl: './tesla-counter.component.html',
   providers: [NUMBER_CONTROL_ACCESSOR],
-  styleUrls: ['./tesla-counter.scss']
+  styleUrls: ['./tesla-counter.component.scss']
 })
 
 export class TeslaCounterComponent implements ControlValueAccessor {
@@ -66,7 +66,7 @@ export class TeslaCounterComponent implements ControlValueAccessor {
 
   // increment Function
   increment() {
-    if (this.value > this.max) {
+    if (this.value < this.max) {
       this.onChange(this.value + this.step)
     }
     this.onTouch();
