@@ -4,11 +4,16 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // Get our API routes
 const api = require('./server/routes/api');
 
 const app = express();
+
+const uri = process.env.MONGODB_URI || 'mongodb://localhost/ng2Tesla';
+mongoose.Promise = global.Promise;
+mongoose.connect(uri);
 
 // Parsers for POST data
 app.use(bodyParser.json());
