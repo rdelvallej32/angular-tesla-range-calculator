@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // Get our API routes
-const api = require('./server/routes/api');
+const api = require('./routes/api');
 
 const app = express();
 
