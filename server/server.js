@@ -12,7 +12,7 @@ const api = require('./routes/api');
 const app = express();
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost/ng2Tesla';
-mongoose.Promise = global.Promise;
+mongoose.Promise = require('bluebird');
 mongoose.connect(uri);
 
 // Parsers for POST data
@@ -37,4 +37,4 @@ app.set('port', port);
 
 const server = http.createServer(app);
 
-server.listen(port, () => console.log(`API running on localhost: ${port}`));
+server.listen(port, () => console.log(`server running on localhost: ${port}`));
