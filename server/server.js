@@ -1,13 +1,13 @@
 'use strict';
 
-const express = require('express');
-const path = require('path');
-const http = require('http');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const config = require('./config/environment.js');
-const morgan = require('morgan');
-const compression = require('compression');
+import express from 'express';
+import path from 'path';
+import http from 'http';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import config from './config/environment.js';
+import morgan from 'morgan';
+import compression from 'compression';
 
 // Get our API routes
 const api = require('./routes/api');
@@ -56,3 +56,6 @@ app.set('port', port);
 const server = http.createServer(app);
 
 server.listen(port, () => console.log(`server running on localhost: ${port}`));
+
+//Expose the application
+exports = module.exports = app;
