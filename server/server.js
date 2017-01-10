@@ -6,6 +6,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/environment.js');
+const morgan = require('morgan');
 
 // Get our API routes
 const api = require('./routes/api');
@@ -23,10 +24,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 // // Point static path to dist
-// app.use(express.static(path.join(__dirname, 'dist')));
-
 app.set('appPath', path.join(config.root, 'dist'));
 app.use(express.static(app.get('appPath')));
+app.use(morgan('dev'));
 
 // Set our api routes
 app.use('/api', api);
