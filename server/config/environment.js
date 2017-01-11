@@ -1,10 +1,13 @@
 'use strict';
+/*eslint no-process-env:0*/
 
-const path = require('path');
-const _ = require('lodash');
+import path from 'path';
+import _ from 'lodash';
 
 var all = {
   env: process.env.NODE_ENV,
+
+  port: process.env.PORT || 3000,
 
   // Root path of server
   root: path.normalize(`${__dirname}/../../`)

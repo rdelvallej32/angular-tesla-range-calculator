@@ -50,7 +50,7 @@ app.route('/*')
     res.sendFile(path.resolve(app.get('appPath') + '/index.html'));
   });
 
-const port = process.env.PORT || '4200';
+const port = config.port;
 app.set('port', port);
 
 const server = http.createServer(app);
